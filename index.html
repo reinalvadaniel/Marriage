@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Undangan Pernikahan</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Poppins:wght@300;400;600&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #dcdcdc, #a9a9a9);
+    overflow-x: hidden;
+}
+
+/* CINEMATIC */
+.cover {
+    height: 100vh;
+    background: url('img/married.jpg') center/cover no-repeat;
+    position: relative;
+    animation: fadeZoom 2s ease;
+}
+
+@keyframes fadeZoom {
+    from {opacity:0; transform:scale(1.05);}
+    to {opacity:1; transform:scale(1);}
+}
+
+.overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(6px);
+}
+
+.content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* TEXT */
+.title {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    letter-spacing: 3px;
+}
+
+.nama {
+    font-family: 'Allura', cursive;
+    font-size: 36px;
+}
+
+.tamu {
+    margin-top: 20px;
+}
+
+/* BUTTON */
+.btn-open, .btn-lokasi {
+    margin-top: 20px;
+    padding: 12px 28px;
+    border-radius: 30px;
+    border: none;
+    background: linear-gradient(135deg, #c0c0c0, #808080);
+    color: white;
+    transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.btn-open:hover, .btn-lokasi:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+}
+
+.btn-open:active, .btn-lokasi:active {
+    transform: scale(0.95);
+}
+
+/* SECTION */
+.section {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.card-box {
+    background: rgba(255,255,255,0.7);
+    border-radius: 20px;
+    padding: 25px;
+    backdrop-filter: blur(10px);
+    transition: 0.3s;
+}
+
+.card-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+/* FOTO */
+.gallery img {
+    width: 100%;
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
+
+/* SPARKLE */
+.sparkle {
+    position: fixed;
+    width: 4px;
+    height: 4px;
+    background: white;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: sparkle 4s linear infinite;
+    opacity: 0.7;
+}
+
+@keyframes sparkle {
+    from {transform: translateY(0); opacity:1;}
+    to {transform: translateY(-100vh); opacity:0;}
+}
+
+/* COUNTDOWN */
+.countdown {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.count-box {
+    background: rgba(255,255,255,0.8);
+    padding: 10px 15px;
+    border-radius: 10px;
+    min-width: 60px;
+}
+
+.count-box span {
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* ANIMASI MASUK ISI */
+.fade-in {
+    animation: fadeInIsi 1s ease;
+}
+
+@keyframes fadeInIsi {
+    from {opacity:0; transform:translateY(20px);}
+    to {opacity:1; transform:translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<!-- AUDIO -->
+<audio id="musik" loop>
+    <source src="music/Yiruma, (이루마) - River Flows in You.mp3" type="audio/mpeg">
+</audio>
+
+<!-- COVER -->
+<div class="cover">
+    <div class="overlay"></div>
+
+    <div class="content">
+        <p class="title">THE WEDDING OF</p>
+        <p class="nama">Sugiyanto & Novi Julistiana</p>
+
+        <div class="tamu">
+            Kepada Yth:<br>
+            <b id="namaTamu">Tamu Undangan</b>
+        </div>
+
+        <button class="btn-open" onclick="bukaUndangan()">Buka Undangan</button>
+    </div>
+</div>
+
+<!-- ISI -->
+<div id="isi" style="display:none">
+
+    <div class="section fade-in">
+        <div class="card-box">
+
+            <h4>Undangan Resepsi Pernikahan</h4>
+
+            <p>
+                Dengan penuh kebahagiaan, kami mengundang Anda untuk menghadiri resepsi pernikahan kami
+            </p>
+
+            <h3>Sugiyanto</h3>
+            <p>&</p>
+            <h3>Novi Julistiana</h3>
+
+            <hr>
+
+            <p><b>Telah melangsungkan akad:</b></p>
+            <p>06 Januari 2026</p>
+
+            <p><b>Resepsi:</b></p>
+            <p>10 Juni 2026</p>
+
+            <!-- ✅ TAMBAHAN JAM -->
+            <p><b>Pukul:</b></p>
+            <p>08:00 WIB - 10:00 WIB</p>
+
+            <!-- COUNTDOWN -->
+            <div class="countdown">
+                <div class="count-box"><span id="hari">0</span>Hari</div>
+                <div class="count-box"><span id="jam">0</span>Jam</div>
+                <div class="count-box"><span id="menit">0</span>Menit</div>
+                <div class="count-box"><span id="detik">0</span>Detik</div>
+            </div>
+
+            <hr>
+
+            <p><b>Lokasi:</b></p>
+            <p>Banyumas Klampar</p>
+
+            <button class="btn-lokasi" onclick="openMaps()">
+                Lihat Lokasi 📍
+            </button>
+
+        </div>
+    </div>
+
+    <!-- GALERI FOTO -->
+    <div class="section fade-in">
+        <div class="container gallery">
+            <h4>Gallery</h4>
+            <img src="img/married.jpg">
+            <img src="img/marriage.jpg">
+        </div>
+    </div>
+
+</div>
+
+<script>
+// nama tamu
+const nama = new URLSearchParams(window.location.search).get('to');
+if(nama){ document.getElementById("namaTamu").innerText = nama; }
+
+// buka undangan
+function bukaUndangan(){
+    document.querySelector('.cover').style.display = 'none';
+    let isi = document.getElementById('isi');
+    isi.style.display = 'block';
+    isi.classList.add('fade-in');
+
+    document.getElementById("musik").play().catch(()=>{});
+}
+
+// MAPS
+function openMaps(){
+    const lat="-7.129969", lng="113.45711";
+    window.location.href=`geo:${lat},${lng}`;
+    setTimeout(()=>{
+        window.open(`https://www.google.com/maps?q=${lat},${lng}`,"_blank");
+    },1000);
+}
+
+// COUNTDOWN JAM 08:00
+const targetDate = new Date("June 10, 2026 08:00:00").getTime();
+
+setInterval(()=>{
+    const now = new Date().getTime();
+    const selisih = targetDate - now;
+
+    document.getElementById("hari").innerText = Math.floor(selisih/(1000*60*60*24));
+    document.getElementById("jam").innerText = Math.floor((selisih%(1000*60*60*24))/(1000*60*60));
+    document.getElementById("menit").innerText = Math.floor((selisih%(1000*60*60))/(1000*60));
+    document.getElementById("detik").innerText = Math.floor((selisih%(1000*60))/1000);
+},1000);
+
+// SPARKLE
+setInterval(()=>{
+    let s=document.createElement('div');
+    s.className='sparkle';
+    s.style.left=Math.random()*100+'%';
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(),4000);
+},700);
+</script>
+
+</body>
+</html>
